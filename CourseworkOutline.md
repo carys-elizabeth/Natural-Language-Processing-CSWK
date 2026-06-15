@@ -57,6 +57,7 @@ commits with concise but informative commit messages. See the section titled Sub
 mission for more details.
 Part One total marks: 30
 2. 10
+
 Part Two — Feature Extraction and Classification
 In the second part of the coursework, your task is to train and test machine learning classifiers
 on a dataset of political speeches. The objective is to learn to predict the political party from
@@ -100,6 +101,7 @@ Five marks are allocated for your git commit history. You should make regular, a
 commits with concise but informative commit messages. See the section below titled
 Submission for more details.
 Part Two total marks: 45
+
 3. Part Three — Zero-shot and Few-shot Classification with LLMs
 In this part of the coursework, you should perform the same political party classification task
 as in Part Two, but using prompting with a large language model instead of the scikit-learn
