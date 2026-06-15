@@ -18,7 +18,6 @@ def read_novels(txt_files):
             filename = os.path.basename(txt_file).split('-')
             novels.append({'Text': content, 'Title': filename[0], 'Author': filename[1], 'Year of Publication': filename[2]})
     novels_dataframe = pd.DataFrame(novels)
-    #novels_dataframe.sort_values(by='Year of Publication', ignore_index=False)
     
     return novels_dataframe.sort_values(by='Year of Publication', ignore_index=True)
 
