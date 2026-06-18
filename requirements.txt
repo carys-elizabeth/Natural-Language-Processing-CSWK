@@ -1,3 +1,8 @@
 os
 glob 
 pandas
+nltk
+string 
+re
+spacy
+pickle
