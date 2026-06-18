@@ -7,6 +7,9 @@ import nltk
 import string
 import re
 from nltk.corpus import cmudict
+import spacy
+import pickle
+
 
 
 #1.a:
@@ -75,6 +78,31 @@ def flesch_kincaid(txt_files): #dictionary, map title to fk reading ease score w
     return dict_fk
 
 #1.d:
+nlp = spacy.load("en_core_web_sm")
+
+def parse(txt_files): #processing text using spaCy tokenizing and parsing + added to dataframe
+    novels = []
+    for txt_file in txt_files:
+        with open(txt_file, 'r') as file:
+            content = file.read()
+            filename = os.path.basename(txt_file).split('-')
+            title = filename[0]
+            doc = nlp(content)
+            novels.append({'Text': content, 'Title': filename[0], 'Author': filename[1], 'Year of Publication': filename[2], 'Doc': doc})
+    spacy_dataframe = pd.DataFrame(novels)
+    with open('dataframe.pkl', 'wb') as file:
+       pickle.dump(spacy_dataframe, file)
+    return spacy_dataframe
+
+spacy_dataframe = parse(txt_files)
+print(spacy_dataframe)
+
+#load the dataframe from the pickle file
+with open('dataframe.pkl', 'rb') as file:
+    spacy_dataframe = pickle.load(file)
+
+
+
 
 
 
