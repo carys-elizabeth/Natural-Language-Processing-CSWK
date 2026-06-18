@@ -1,0 +1,5 @@
+#Virual environments
+.venv
+
+#pkl file
+dataframe.pkl
