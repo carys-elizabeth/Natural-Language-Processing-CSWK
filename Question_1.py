@@ -14,7 +14,6 @@ import spacy
 import pickle
 import math
 
-
 #1.a:
 
 directory_path = "/Users/caryswilliams/Documents/Masters Degree Folder/Coursework Pack NLP/texts"
@@ -81,7 +80,7 @@ def flesch_kincaid(txt_files): #dictionary, map title to fk reading ease score w
     return dict_fk
 
 #1.d:
-#nlp = spacy.load("en_core_web_sm") #stored outside of the function to prevent it being loaded each run 
+nlp = spacy.load("en_core_web_sm") #stored outside of the function to prevent it being loaded each run 
 
 def parse(txt_files): #processing text using spaCy tokenizing and parsing + added to dataframe
     novels = []
@@ -109,76 +108,76 @@ with open('dataframe.pkl', 'rb') as file:
     spacy_dataframe = pickle.load(file)
 
 #for loop for top 10 syntactic subjects per novel.
-top_10_subjects = {}
-for index, row in spacy_dataframe.iterrows():
-    doc = row['Doc']
-    subjects = [token.text for token in doc if token.dep_ == 'nsubj']
-    subject_freq = nltk.FreqDist(subjects)
-    top_10_subjects[row['Title']] = subject_freq.most_common(10)
+def top_10_subjects(spacy_dataframe):
+    top_10_subjects = {}
+    for index, row in spacy_dataframe.iterrows():
+        doc = row['Doc']
+        subjects = [token.text for token in doc if token.dep_ == 'nsubj']
+        subject_freq = nltk.FreqDist(subjects)
+        top_10_subjects[row['Title']] = subject_freq.most_common(10)
 
-#additional for loop to make presentation of output easier to differentiate between novels
-for title, subjects in top_10_subjects.items():
-    print(f"Top 10 syntactic subjects in {title}:")
-    print(subjects)
+    for title, subjects in top_10_subjects.items():
+        print(f"Top 10 syntactic subjects in {title}:")
+        print(subjects)
 
 #####
 
 #for loop to output top verbs associated with He (ordered by PMI)
-top_verbs_he = {}
-for index,row in spacy_dataframe.iterrows():
-    verb_counter = {}
-    he_counter = 0
-    pmi_data_he = []
-    for token in row['Doc']:
-        if token.text.lower() == 'he' and token.dep_ in ['nsubj']:
-            head = token.head
-            he_counter += 1
-            if head.pos_ == "VERB":
-                verb_counter[head.text] = verb_counter.get(head.text, 0) + 1
-    for verb, count in verb_counter.items():
-        if count >= 5:
-            p_w1_w2 = (count + he_counter) / len(row['Text'].split())
-            p_w1 = count / len(row['Text'].split())
-            p_w2 = he_counter / len(row['Text'].split())
-            pmi = round(math.log2(p_w1_w2 / (p_w1 * p_w2)),2)
-            pmi_data_he.append((verb, pmi)) 
-    top_verbs_he[row['Title']] = sorted(pmi_data_he)
-
-#additional for loop to make presentation of output easier to differentiate between novels   
-for title, verbs in top_verbs_he.items():
-    print(f"Top verbs associated with 'he' in {title}:")
-    print(verbs)
-
+def top_verbs_he(spacy_dataframe):
+    top_verbs_he = {}
+    for index,row in spacy_dataframe.iterrows():
+        verb_counter = {}
+        he_counter = 0
+        pmi_data_he = []
+        for token in row['Doc']:
+            if token.text.lower() == 'he' and token.dep_ in ['nsubj']:
+                head = token.head
+                he_counter += 1
+                if head.pos_ == "VERB":
+                    verb_counter[head.text] = verb_counter.get(head.text, 0) + 1
+        for verb, count in verb_counter.items():
+            if count >= 5:
+                p_w1_w2 = (count + he_counter) / len(row['Text'].split())
+                p_w1 = count / len(row['Text'].split())
+                p_w2 = he_counter / len(row['Text'].split())
+                pmi = round(math.log2(p_w1_w2 / (p_w1 * p_w2)),2)
+                pmi_data_he.append((verb, pmi)) 
+        top_verbs_he[row['Title']] = sorted(pmi_data_he)
+   
+    for title, verbs in top_verbs_he.items():
+        print(f"Top verbs associated with 'he' in {title}:")
+        print(verbs)
 
 ####
 
-#for loop to output top verbs associated with She (ordered by PMI)
+#function to output top verbs associated with She (ordered by PMI)
 
-top_verbs_she = {}
-for index,row in spacy_dataframe.iterrows():
-    verb_counter = {}
-    she_counter = 0
-    pmi_data_she = []
-    for token in row['Doc']:
-        if token.text.lower() == 'she' and token.dep_ in ['nsubj']:
-            head = token.head
-            she_counter += 1
-            if head.pos_ == 'VERB':
-                verb_counter[head.text] = verb_counter.get(head.text, 0) + 1
-    for verb, count in verb_counter.items():
-        if count >= 5:
-            p_w1_w2 = (count + she_counter) / len(row['Text'].split())
-            p_w1 = count / len(row['Text'].split())
-            p_w2 = she_counter / len(row['Text'].split())
-            pmi = round(math.log2(p_w1_w2 / (p_w1 * p_w2)),2)
-            pmi_data_she.append((verb, pmi)) 
-    top_verbs_she[row['Title']] = sorted(pmi_data_she)
+def top_verbs_she(spacy_dataframe) :
+    top_verbs_she = {}
+    for index,row in spacy_dataframe.iterrows():
+        verb_counter = {}
+        she_counter = 0
+        pmi_data_she = []
+        for token in row['Doc']:
+            if token.text.lower() == 'she' and token.dep_ in ['nsubj']:
+                head = token.head
+                she_counter += 1
+                if head.pos_ == 'VERB':
+                    verb_counter[head.text] = verb_counter.get(head.text, 0) + 1
+        for verb, count in verb_counter.items():
+            if count >= 5:
+                p_w1_w2 = (count + she_counter) / len(row['Text'].split())
+                p_w1 = count / len(row['Text'].split())
+                p_w2 = she_counter / len(row['Text'].split())
+                pmi = round(math.log2(p_w1_w2 / (p_w1 * p_w2)),2)
+                pmi_data_she.append((verb, pmi)) 
+        top_verbs_she[row['Title']] = sorted(pmi_data_she)
+    for title, verbs in top_verbs_she.items():
+        print(f"Top verbs associated with 'she' in {title}:")
+        print(verbs)
 
-#additional for loop to make presentation of output easier to differentiate between novels
 
-for title, verbs in top_verbs_she.items():
-    print(f"Top verbs associated with 'she' in {title}:")
-    print(verbs)
+
 
 
 
