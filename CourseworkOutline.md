@@ -56,9 +56,8 @@ Five marks are allocated for your git commit history. You should make regular, a
 commits with concise but informative commit messages. See the section titled Sub-
 mission for more details.
 Part One total marks: 30
-2. 10
 
-Part Two — Feature Extraction and Classification
+2.Part Two — Feature Extraction and Classification
 In the second part of the coursework, your task is to train and test machine learning classifiers
 on a dataset of political speeches. The objective is to learn to predict the political party from
 the text of the speech.
