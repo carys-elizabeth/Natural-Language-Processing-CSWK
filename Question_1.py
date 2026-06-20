@@ -1,14 +1,9 @@
 #Syntax and Style
 
-from itertools import count
-from itertools import count
 import os
 import glob
-from xml.parsers.expat import model 
 import pandas as pd
 import nltk
-import string
-import re
 from nltk.corpus import cmudict
 import spacy
 import pickle
@@ -108,6 +103,7 @@ with open('dataframe.pkl', 'rb') as file:
     spacy_dataframe = pickle.load(file)
 
 #for loop for top 10 syntactic subjects per novel.
+#with this I have interpreted "subject" to mean the subject of the clause, therefore counting the highest number of "nsubj"
 def top_10_subjects(spacy_dataframe):
     top_10_subjects = {}
     for index, row in spacy_dataframe.iterrows():
