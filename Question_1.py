@@ -173,8 +173,12 @@ def top_verbs_she(spacy_dataframe) :
         print(verbs)
 
 
-
-
+#AI acknowledgement:
+#Within this Question, the built in CoPilot in VScode was used for minor troubleshooting of errors 
+#Once where en_core_web_sm was not installing correctly, due to a missing install, 
+#Once due to an issue with variable names being repeated (cmudict)
+#Once where the data being processed in read_novels(txt_files) was not being outputted correctly.
+#No code was directly generated for use in Question 1, all suggestions by CoPilot were reviewed but adapted and implemented in my own way, in line with my understanding and coding style
 
 
 
