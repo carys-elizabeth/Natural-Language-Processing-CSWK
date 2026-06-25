@@ -113,14 +113,14 @@ def top_verbs_he(spacy_dataframe): #function to output top verbs associated with
         he_counter = 0
         pmi_data_he = []
         for token in row['Doc']:
-            if token.text.lower() == 'he' and token.dep_ in ['nsubj']:
+            if token.text.lower() == 'he' and token.dep_ in ['nsubj']: #only include where He is the Subject
                 head = token.head
-                he_counter += 1
+                he_counter += 1 #counting total occurences of He in text 
                 if head.pos_ == "VERB":
                     verb_counter[head.text] = verb_counter.get(head.text, 0) + 1
         for verb, count in verb_counter.items():
             if count >= 5:
-                p_w1_w2 = (count + he_counter) / len(row['Text'].split())
+                p_w1_w2 = (count + he_counter) / len(row['Text'].split()) #for calculation of PMI, adding count of the verb to the total occurrences of he and dividing by the length of the document 
                 p_w1 = count / len(row['Text'].split())
                 p_w2 = he_counter / len(row['Text'].split())
                 pmi = round(math.log2(p_w1_w2 / (p_w1 * p_w2)),2)
@@ -140,14 +140,14 @@ def top_verbs_she(spacy_dataframe) : #function to output top verbs associated wi
         she_counter = 0
         pmi_data_she = []
         for token in row['Doc']:
-            if token.text.lower() == 'she' and token.dep_ in ['nsubj']:
+            if token.text.lower() == 'she' and token.dep_ in ['nsubj']: #Only include where She is the subject 
                 head = token.head
-                she_counter += 1
+                she_counter += 1 #ensure that number of occurrences of She is counted for use in PMI
                 if head.pos_ == 'VERB':
                     verb_counter[head.text] = verb_counter.get(head.text, 0) + 1
         for verb, count in verb_counter.items():
             if count >= 5:
-                p_w1_w2 = (count + she_counter) / len(row['Text'].split())
+                p_w1_w2 = (count + she_counter) / len(row['Text'].split()) #for calculation of PMI, adding count of the verb to the total occurrences of she and dividing by the length of the document 
                 p_w1 = count / len(row['Text'].split())
                 p_w2 = she_counter / len(row['Text'].split())
                 pmi = round(math.log2(p_w1_w2 / (p_w1 * p_w2)),2)
