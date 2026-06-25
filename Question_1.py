@@ -5,17 +5,17 @@ import glob
 import pandas as pd
 import nltk
 from nltk.corpus import cmudict
+from pathlib import Path
 import spacy
 import pickle
 import math
 
-#1.a:
+#Question 1.a: all functions, corresponding to parts of question, will run upon calling in the terminal 
 
-directory_path = "/Users/caryswilliams/Documents/Masters Degree Folder/Coursework Pack NLP/texts"
-
+directory_path = "/Users/caryswilliams/Documents/Masters Degree Folder/Coursework Pack NLP/texts" #input own directory path here 
 txt_files = glob.glob(os.path.join(directory_path, "**", "*.txt"), recursive=True)
 
-def read_novels(txt_files): #dataframe with important information about the novels, ordered by year of publication
+def read_novels(txt_files): #dataframe with information about the novels, ordered by year of publication
     novels = []
     for txt_file in txt_files:
         with open(txt_file, 'r') as file:
@@ -26,8 +26,6 @@ def read_novels(txt_files): #dataframe with important information about the nove
     
     return novels_dataframe.sort_values(by='Year of Publication', ignore_index=True)
 
-#novels_dataframe = read_novels(txt_files)
-#print(novels_dataframe)
 
 #1.b:
 
@@ -43,21 +41,20 @@ def nltk_ttr(txt_files): #dictionary, mapping title to type text ratio, no punct
             if not tokens:
                 return 0
             types = set(tokens)
-            ttr = (len(types)) / len(tokens) #ttr - number of unique word types div by total number of word tokens
+            ttr = (len(types)) / len(tokens) #ttr calculation
             dict_ttr[title] = ttr
-    return dict_ttr
+    return dict_ttr 
 
 #1.c:
 
 cmu_dict = cmudict.dict()
-
-def count_syllables(word): #CMU for syllables
+def count_syllables(word): #function for syllable count
     if word.lower() not in cmu_dict:
         return 0
     syllable_counts = (len(list(y for y in x if y[-1].isdigit())) for x in cmu_dict[word.lower()])
     return next(syllable_counts, 0)
 
-def flesch_kincaid(txt_files): #dictionary, map title to fk reading ease score with CMU for estimating syllables
+def flesch_kincaid(txt_files): #dictionary, map title to fk reading ease score 
     dict_fk = {}
     for txt_file in txt_files:
         with open(txt_file, 'r') as file:
@@ -76,35 +73,26 @@ def flesch_kincaid(txt_files): #dictionary, map title to fk reading ease score w
 
 #1.d:
 nlp = spacy.load("en_core_web_sm") #stored outside of the function to prevent it being loaded each run 
-
-def parse(txt_files): #processing text using spaCy tokenizing and parsing + added to dataframe
+def parse(txt_files): #processing text using spaCy tokenizing and parsing + added to dataframe, saved to a pickle file
     novels = []
     for txt_file in txt_files:
        with open(txt_file, 'r') as file:
             content = file.read()
             filename = os.path.basename(txt_file).split('-')
-            title = filename[0]
             doc = nlp(content)
             novels.append({'Text': content, 'Title': filename[0], 'Author': filename[1], 'Year of Publication': filename[2], 'Doc': doc})
     spacy_dataframe = pd.DataFrame(novels)
-    with open('dataframe.pkl', 'wb') as file:
+    output_file = Path("dataframe.pkl")
+    output_file.parent.mkdir(exist_ok=True, parents=True)
+    with open(output_file, 'wb+') as file:
        pickle.dump(spacy_dataframe, file)
     return spacy_dataframe
 
-spacy_dataframe = parse(txt_files)
-print(spacy_dataframe)
-
-###
-
 #1.e:
 
-#load the dataframe from the pickle file
-with open('dataframe.pkl', 'rb') as file:
-    spacy_dataframe = pickle.load(file)
-
-#for loop for top 10 syntactic subjects per novel.
-#with this I have interpreted "subject" to mean the subject of the clause, therefore counting the highest number of "nsubj"
-def top_10_subjects(spacy_dataframe):
+#3x functions, each holding for loop for top 10 syntactic subjects per novel.
+#with this I have understood "subject" to mean the subject of the clause, therefore counting the highest number of "nsubj"
+def top_10_subjects(spacy_dataframe): #function to output the top 10 syntactic subjects in each novel
     top_10_subjects = {}
     for index, row in spacy_dataframe.iterrows():
         doc = row['Doc']
@@ -118,8 +106,7 @@ def top_10_subjects(spacy_dataframe):
 
 #####
 
-#for loop to output top verbs associated with He (ordered by PMI)
-def top_verbs_he(spacy_dataframe):
+def top_verbs_he(spacy_dataframe): #function to output top verbs associated with He (ordered by PMI)
     top_verbs_he = {}
     for index,row in spacy_dataframe.iterrows():
         verb_counter = {}
@@ -146,9 +133,7 @@ def top_verbs_he(spacy_dataframe):
 
 ####
 
-#function to output top verbs associated with She (ordered by PMI)
-
-def top_verbs_she(spacy_dataframe) :
+def top_verbs_she(spacy_dataframe) : #function to output top verbs associated with She (ordered by PMI)
     top_verbs_she = {}
     for index,row in spacy_dataframe.iterrows():
         verb_counter = {}
@@ -172,13 +157,39 @@ def top_verbs_she(spacy_dataframe) :
         print(f"Top verbs associated with 'she' in {title}:")
         print(verbs)
 
+if __name__ == "__main__":
+    print("Initial Novels Dataframe:\n")
+    novels_dataframe = read_novels(txt_files)
+    print(novels_dataframe)
+    print("\nDictionary of Type Token Ratio:\n\n")
+    nltk_ttr_calc = nltk_ttr(txt_files)
+    print(nltk_ttr_calc)
+    print("\nDictionary of Flesch Kincaid Scores:\n\n")
+    flesch_kincaid_calc = flesch_kincaid(txt_files)
+    print(flesch_kincaid_calc)
+    print("\nSpacy Dataframe:\n\n")
+    parse_spacy_dataframe = parse(txt_files)
+    print(parse_spacy_dataframe)
+    with open('dataframe.pkl', 'rb') as file: #loading the dataframe from the pickle file
+        spacy_dataframe = pickle.load(file)
+    print("\nTop 10 Subtactic Subjects in Novels(Ordered by PMI):\n")
+    top_10_subj = top_10_subjects(spacy_dataframe)
+    print(top_10_subj)
+    print("\nTop Verbs associated with He in Novels(Ordered by PMI):\n")
+    top_he = top_verbs_he(spacy_dataframe)
+    print(top_he)
+    print("\nTop Verbs associated with She in Novels(Ordered by PMI):\n")
+    top_she = top_verbs_she(spacy_dataframe)
+    print(top_she)
+
+
 
 #AI acknowledgement:
-#Within this Question, the built in CoPilot in VScode was used for minor troubleshooting of errors 
-#Once where en_core_web_sm was not installing correctly, due to a missing install, 
-#Once due to an issue with variable names being repeated (cmudict)
-#Once where the data being processed in read_novels(txt_files) was not being outputted correctly.
-#No code was directly generated for use in Question 1, all suggestions by CoPilot were reviewed but adapted and implemented in my own way, in line with my understanding and coding style
+#Within this Question, the built in CoPilot in VScode was used for minor troubleshooting of errors:
+#1 Where en_core_web_sm was not installing correctly, due to a missing install, 
+#2 Due to an issue with variable names being repeated (cmudict)
+#3 Where the data being processed in read_novels(txt_files) was not being outputted correctly.
+#No code was directly generated and used in Question 1, all suggestions by CoPilot were reviewed in the CoPilot window but adapted and implemented in my own way, in line with my understanding and coding style
 
 
 
