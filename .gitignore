@@ -3,3 +3,8 @@
 
 #pkl file
 dataframe.pkl
+
+#json settings
+.vscode
+settings.json
+
