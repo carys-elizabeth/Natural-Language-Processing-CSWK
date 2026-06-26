@@ -197,3 +197,5 @@ if __name__ == "__main__":
 #Built in Co-pilot tool was used for:
 #Install error with "Punkt" - SSL certificate issue on macOS that needed correcting for it to run 
 #Error in code where I had placed the wrong variable inside my confusion matrix code.
+
+#No code was directly generated and used in Question 2, all suggestions by CoPilot were reviewed in the CoPilot window but adapted and implemented in my own way, in line with my understanding and coding style
