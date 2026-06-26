@@ -1,0 +1,26 @@
+8987c6f2b4826081e10640bdf3a8c53169d919a7,carys-elizabeth,carysewilliams7@gmail.com,2026-06-26,Amendments to Question 3.c to trial different model, and change made to prompt in Q 3.b. Answer to Q3.d added
+f5ea97e37eeb661d80104b002b122bf1cbed0a60,carys-elizabeth,carysewilliams7@gmail.com,2026-06-26,AI Declaration edited for clarity
+3615374b31403a992cfccc18090d1ad27a7a1973,carys-elizabeth,carysewilliams7@gmail.com,2026-06-25,Updated code to include initial phase of Zero and Few shot prompt code.
+403d4b6ac348e9cc62b1ccdbe9be56a82a6b45ad,carys-elizabeth,carysewilliams7@gmail.com,2026-06-25,update to requirements list to include scikit-learn
+cc8b575cf9db1bcc6e0d23ac571b4542c2b95572,carys-elizabeth,carysewilliams7@gmail.com,2026-06-25,updates to gitignore files list
+c87b6f0c541fbe9f5c28e81691bc4cf7c065b93e,carys-elizabeth,carysewilliams7@gmail.com,2026-06-25,Final amendments made to Question 2, incl answering text based question 2.e and formatting output.
+45087dc914a75969f1db6dc9f61f1bf700b84660,carys-elizabeth,carysewilliams7@gmail.com,2026-06-25,Additions of comments for clarity
+3c35e0627a644815f1a7677f0d53ac8e92472e51,carys-elizabeth,carysewilliams7@gmail.com,2026-06-25,Final Edits made to Question 1, including layout of output and code for creation of pkl file if file did not exist
+01ef4b49ee81c4f803d63732d064795523e16283,carys-elizabeth,carysewilliams7@gmail.com,2026-06-23,AI use comment inputted at the end of Question 1 page
+676f996b4ed204b870406e607139ba8283e16489,carys-elizabeth,carysewilliams7@gmail.com,2026-06-23,Addition of response to question 2d - implementation of a new(alternative) tokenizer, passed to Tfidfvectorizer and adapted for classification performance. Further amendments to be made. Also comparison between Training and Testing Accuracy and A confusion matrix.
+66a04eec5c013d70c99d86ff229b388469091a5d,carys-elizabeth,carysewilliams7@gmail.com,2026-06-20,Added Part A and B for Question 2 - including amending dataframe alterations, Random Forest and SVM classifiers.
+55cc261a42af183a9da326373d01ca7a0c9877e9,carys-elizabeth,carysewilliams7@gmail.com,2026-06-20,Amendments to import list
+6f990589711c04471dcc8d890e42ddcb50e2a965,carys-elizabeth,carysewilliams7@gmail.com,2026-06-20,Minor edits to layout
+7efa79bb024a57b28a98fad48de2b7ff4fdc9326,carys-elizabeth,carysewilliams7@gmail.com,2026-06-19,Amended for loops to functions as per brief
+0b3a8ed6601ca96093d2eb0192c82b6205d3aee1,carys-elizabeth,carysewilliams7@gmail.com,2026-06-19,Added question 1 e (3x for loops r.e verbs likely to occur with he and she, and 10 common syntactic subject)
+e68f9a3eeacc79157766e4b4d53cdf4cbeb9d907,carys-elizabeth,carysewilliams7@gmail.com,2026-06-19,Updated Requirements list
+52f03c1bd8dc8d867d2c6075db76574367eb5fea,carys-elizabeth,carysewilliams7@gmail.com,2026-06-18,addition of .gitignore file
+da639ae5dacd5ecf2cd08910b63d17f9d5a4c648,carys-elizabeth,carysewilliams7@gmail.com,2026-06-18,Added code for Part 1 d(i, ii, iii and iv) - addition of parsing function, using spacy.
+ae51e55d44cede163a3bddbe84dcb5380a4d025a,carys-elizabeth,carysewilliams7@gmail.com,2026-06-18,added required module installs for part 1
+e80b801ca6b4d38407feebd8975b0fded28f9e40,carys-elizabeth,carysewilliams7@gmail.com,2026-06-17,Question 1b and 1c added (ttr function and flesch kincair function)
+b4bf4865307e991d6a13c8476030ecf54a2b348f,carys-elizabeth,carysewilliams7@gmail.com,2026-06-15,Minor change to Question 1aii
+8c525b039c431fbc69d2fa1c834405119d681af7,carys-elizabeth,carysewilliams7@gmail.com,2026-06-15,Completion of Question 1ai and 1aii
+da3e0c240374ddf9b116dc0b4cf4d8b88110bb04,carys-elizabeth,carysewilliams7@gmail.com,2026-06-15,Addition of relevant files for coursework
+f74dfe03a2f3446e433df8509fd269b75a3abcd2,carys-elizabeth,carysewilliams7@gmail.com,2026-06-05,Add coursework declaration to README
+fe2559e4cf670932d9218ab90c0ea19528f1725a,carys-elizabeth,carysewilliams7@gmail.com,2026-06-05,Add CourseworkOutline.md file
+8ab8901276d882c99294a4e4144fc09097559e3d,carys-elizabeth,carysewilliams7@gmail.com,2026-06-05,Initial commit
